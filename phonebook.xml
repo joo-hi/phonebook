@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="phonebook">
+
+	<select id="selectList"
+			resultType="Phone">
+		SELECT no, name, phone, gender, 
+			   birth_date birthDate, profile_image profileImage,
+			   regdate
+		FROM phonebook
+		ORDER BY 1 DESC
+	</select>
+	
+  <insert id="insert"
+          parameterType="Phone">
+           INSERT INTO phonebook(no,name,phone,gender,birth_date,profile_image,regdate)
+           VALUES(phonebook_seq.nextval,#{name},#{phone},#{gender},#{birthDate},#{profileImage},systimestamp)
+  </insert>
+  
+ <delete id="delete"
+         parameterType="int">
+         DELETE phonebook
+         WHERE no = #{no}     
+ </delete> 
+ 
+ <select id="selectOne"
+			parameterType="int"
+			resultType="Phone">
+		SELECT no, name, phone, gender, 
+				birth_date birthDate, profile_image profileImage, regdate
+		FROM phonebook
+		WHERE no = #{no}
+</select>
+
+  <update id="update"
+          parameterType="Phone">
+           UPDATE phonebook
+           SET phone=#{phone}, birth_date=#{birthDate}, gender=#{gender}
+           WHERE no = #{no}
+  </update>
+   
+	
+</mapper>

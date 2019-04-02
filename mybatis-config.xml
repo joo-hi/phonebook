@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<!-- 컬럼에 NULL 넣을 수 있게 하려면 -->
+<settings>
+	<setting name="jdbcTypeForNull" value="NULL" />
+</settings>
+
+<!-- 
+typeAlias
+org.jbp.guestbook.vo.Guest
+패키지명.클래스명이 너무 길 경우
+짧게 쓰려고 alias를 지정할 수 있습니다.
+ -->
+ <typeAliases>
+ 	<typeAlias alias="Phone" type="com.jbp.phonebook.vo.Phone"/>
+ </typeAliases>
+
+<!-- DB 연결 환경 설정 -->
+<environments default = "development">
+	
+	<environment id = "development">
+		<transactionManager type="JDBC"/>
+		<!-- Java Naming Directory Interface -->
+		<dataSource type="JNDI">
+			<property name = "data_source"
+			value = "java:comp/env/jdbc/oracle"/>
+		</dataSource>
+	</environment>
+
+</environments>
+
+
+<!-- mapper 파일의 경로 -->
+<mappers>
+	<mapper resource = "com/jbp/phonebook/mapper/phonebook.xml"/>
+</mappers>
+</configuration>
